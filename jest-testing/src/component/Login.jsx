@@ -1,12 +1,13 @@
-import React from "react";
 import axios from "axios";
 import { useState } from "react";
-export default function Login() {
+
+const Login = () => {
   const [error, setError] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState({});
-  const [loading, setLoading] = useState(false);
+
   const handleClick = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -18,8 +19,9 @@ export default function Login() {
     } catch {
       setError(true);
     }
-    setLoading(false);
+    setLoading(false)
   };
+
   return (
     <div className="container">
       <span className="user">{user.name}</span>
@@ -43,9 +45,11 @@ export default function Login() {
           data-testid="error"
           style={{ visibility: error ? "visible" : "hidden" }}
         >
-          something went wrong!
+          Something went wrong!
         </span>
       </form>
     </div>
   );
-}
+};
+
+export default Login;

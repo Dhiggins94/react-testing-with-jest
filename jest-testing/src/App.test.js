@@ -7,19 +7,19 @@
 //   expect(linkElement).toBeInTheDocument();
 // });
 
-test('renders 3 list items ', () => {
-  render(<App />);
-  const listItems = screen.getAllByRole("listitem");
-  expect(listItems).toHaveLength(3);
-  // we can also use expect(listitems.length).toBe() || toequal()
+// test('renders 3 list items ', () => {
+//   render(<App />);
+//   const listItems = screen.getAllByRole("listitem");
+//   expect(listItems).toHaveLength(3);
+//   // we can also use expect(listitems.length).toBe() || toequal()
 
-});
+// });
 
-test('renders span', () => {
-  render(<App />);
-  const title = screen.getByTestId("mytestid");
-  expect(title).toBeInTheDocument();
-});
+// test('renders span', () => {
+//   render(<App />);
+//   const title = screen.getByTestId("mytestid");
+//   expect(title).toBeInTheDocument();
+// });
 
 
 test('sum should be 6', () => {
