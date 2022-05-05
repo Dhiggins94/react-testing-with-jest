@@ -1,5 +1,15 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import Login from "./Login";
+
+
+jest.mock("axios", () => ({
+  __esmodules: true,
+  default: {
+    get: () => ({
+      data:{id:1, name:"Leanne"}
+    })
+  }
+}))
 
 test("username input should be rendered", () => {
   render(<Login />);
@@ -81,4 +91,43 @@ test("button  should not be disabled when inputs exist", () => {
 
   expect(buttonEl).not.toBeDisabled();
   // checks to see if its disbaled
+});
+
+test("loading should not render", () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  expect(buttonEl).not.toHaveTextContent(/please wait/i);
+  // checks value for the password to see if its empty,
+});
+
+test("loading should render when click", () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  const userInputEl = screen.getByPlaceholderText(/username/i);
+  const passworInputEl = screen.getByPlaceholderText(/password/i);
+
+  const testValue = "test";
+
+  fireEvent.change(userInputEl, { target: { value: testValue } });
+  fireEvent.change(passworInputEl, { target: { value: testValue } });
+  fireEvent.click(buttonEl);
+  expect(buttonEl).not.toHaveTextContent(/please wait/i);
+  // checks value for the password to see if its empty,
+});
+
+
+test("loading should not render when fetching data", async () => {
+  render(<Login />);
+  const buttonEl = screen.getByRole("button");
+  const userInputEl = screen.getByPlaceholderText(/username/i);
+  const passworInputEl = screen.getByPlaceholderText(/password/i);
+
+  const testValue = "test";
+
+  fireEvent.change(userInputEl, { target: { value: testValue } });
+  fireEvent.change(passworInputEl, { target: { value: testValue } });
+  fireEvent.click(buttonEl);
+  await waitFor(() =>
+  expect(buttonEl).not.toHaveTextContent(/please wait/i))
+  // checks value for the password to see if its empty,
 });
